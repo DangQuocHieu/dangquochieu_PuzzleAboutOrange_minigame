@@ -56,7 +56,7 @@ public class LevelManager : PersistentSingleton<LevelManager>, IMessageHandle
         switch (message.type)
         {
             case GameMessageType.OnGameWin:
-                int score = (int)message.data[0];
+                int score = GameManager.Instance.CalculateScore();
                 SaveScore(score);
                 UnlockNextLevel();
                 break;

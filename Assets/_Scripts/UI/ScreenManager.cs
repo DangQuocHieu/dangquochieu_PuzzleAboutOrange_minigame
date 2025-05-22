@@ -50,13 +50,13 @@ public class ScreenManager : PersistentSingleton<ScreenManager>, IMessageHandle
             screen.gameObject.SetActive(true);
         }
         foreach (UIScreen screen in transform.GetComponentsInChildren<UIScreen>())
+        {
+            if (!_uiScreenDictionary.ContainsKey(screen.Key))
             {
-                if (!_uiScreenDictionary.ContainsKey(screen.Key))
-                {
-                    _uiScreenDictionary.Add(screen.Key, screen);
-                    screen.gameObject.SetActive(false);
-                }
+                _uiScreenDictionary.Add(screen.Key, screen);
+                screen.gameObject.SetActive(false);
             }
+        }
     }
 
     public void ShowScreen(ScreenKey key)
@@ -73,7 +73,10 @@ public class ScreenManager : PersistentSingleton<ScreenManager>, IMessageHandle
     {
         foreach (var key in _uiScreenDictionary.Keys)
         {
-            HideScreen(key);
+            if (_uiScreenDictionary[key].gameObject.activeInHierarchy)
+            {
+                HideScreen(key);
+            }
         }
     }
 

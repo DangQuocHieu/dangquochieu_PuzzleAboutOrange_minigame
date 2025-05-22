@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoardManager : Singleton<BoardManager>
 {
@@ -12,7 +14,7 @@ public class BoardManager : Singleton<BoardManager>
     [SerializeField] private Transform _blockCellsContainer;
     [SerializeField] private Transform _piecesContailer;
     private HashSet<Vector2Int> _blockCells = new HashSet<Vector2Int>();
-
+    
     void Start()
     {
         GetBlockCellsPosition();

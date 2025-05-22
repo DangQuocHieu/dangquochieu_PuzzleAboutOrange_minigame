@@ -1,4 +1,6 @@
+using System.Collections;
 using System.ComponentModel.Design;
+using DG.Tweening;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -10,15 +12,26 @@ public enum ScreenKey
 }
 public abstract class UIScreen : MonoBehaviour
 {
-    [SerializeField] private ScreenKey _key;
+    [SerializeField] protected ScreenKey _key;
     public ScreenKey Key => _key;
-    public virtual void Show()
+    public void Show()
     {
         gameObject.SetActive(true);
+        StartCoroutine(OnShowCoroutine());
     }
 
-    public virtual void Hide()
+    public void Hide()
     {
+        StartCoroutine(OnHideCoroutine());
+    }
+
+    protected virtual IEnumerator OnShowCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+    }
+    protected virtual IEnumerator OnHideCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
         gameObject.SetActive(false);
     }
 }

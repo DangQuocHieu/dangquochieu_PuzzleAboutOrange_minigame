@@ -76,10 +76,7 @@ public class PieceController : Singleton<PieceController>
             _disableControl = true;
             float delay = 1f;
             yield return new WaitForSeconds(delay);
-            MessageManager.SendMessage(new Message(GameMessageType.OnGameWin, new object[] {
-                GameManager.Instance.CalculateScore()
-            }));
-            
+            MessageManager.SendMessage(new Message(GameMessageType.OnGameWin));
         }
     }
 
