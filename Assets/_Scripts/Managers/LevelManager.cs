@@ -26,13 +26,13 @@ public class LevelManager : PersistentSingleton<LevelManager>, IMessageHandle
     }
     public void UnlockNextLevel()
     {
-        if (_currentLevel == _maxLevelCount)
+        if (_currentLevel > _maxLevelCount)
         {
             return;
         }
         int levelReached = PlayerPrefs.GetInt("LevelReached", 1);
         ++_currentLevel;
-        if (_currentLevel > levelReached && _currentLevel <= _maxLevelCount)
+        if (_currentLevel > levelReached)
         {
             PlayerPrefs.SetInt("LevelReached", _currentLevel);
             PlayerPrefs.Save();
@@ -41,7 +41,7 @@ public class LevelManager : PersistentSingleton<LevelManager>, IMessageHandle
 
     public void LoadNextLevel()
     {
-        if (_currentLevel == _maxLevelCount)
+        if (_currentLevel > _maxLevelCount)
         {
             SceneManager.LoadScene("Menu Scene");
         }

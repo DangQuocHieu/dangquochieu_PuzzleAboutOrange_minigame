@@ -26,7 +26,7 @@ public class LevelSelectionScreenHUD : MonoBehaviour
             button.GetComponent<Button>().interactable = false;
         }
 
-        for(int i = 0; i < levelReached; i++)
+        for(int i = 0; i < Mathf.Min(maxLevelCount, levelReached); i++)
         {
             _selectionButtonList[i].GetComponent<Button>().interactable = true;
         }
